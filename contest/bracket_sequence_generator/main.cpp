@@ -9,7 +9,7 @@ void print_sequences_internal(int init_num, std::string& seq, int open_bracket_c
 		return;
 	}
 
-	if (init_num - open_bracket_count + 1 > init_num / 2) {
+	if (open_bracket_count < init_num / 2) {
 		seq.push_back('(');
 		print_sequences_internal(init_num, seq, open_bracket_count+1, close_bracket_count);
 		seq.pop_back();

@@ -1,6 +1,7 @@
 #include <iostream>
 #include <map>
 #include <vector>
+#include <queue>
 
 struct Coordinate {
 	long x;
@@ -40,39 +41,24 @@ int main() {
 	std::vector<bool> visited_cities(city_coordinates.size(), false);
 	visited_cities[begin_city_idx] = true;
 
-	int search_depth = 0;
+	std::vector<int> distances(city_coordinates.size(), -1);
+	distances[begin_city_idx] = 0;
 
-	std::vector<int> prev_cities(city_coordinates.size(), INT32_MAX);
+	std::queue<int> next_cities;
+	next_cities.push(begin_city_idx);
 
-	std::vector<int> suitable_city_idxs;
-	std::vector<int> suitable_city_idxs_next;
-	suitable_city_idxs.push_back(begin_city_idx);
+	while (!next_cities.empty()) {
+		int next = next_cities.front();
+		next_cities.pop();
 
-	int min_cities = -1;
-	do {
-		search_depth++;
-		for (auto i: suitable_city_idxs) {
-			for (int adjacent = 0; adjacent < city_count; adjacent++) {
-				if (i == adjacent) continue;
-				if (city_coordinates[i].dist(city_coordinates[adjacent]) > max_dist) continue;
+		for (int adj: adjacency_list[next]) {
+			if (visited_cities[adj]) continue;
 
-				if (visited_cities[adjacent]) continue;
-
-				visited_cities[adjacent] = true;
-				prev_cities[adjacent] = i;
-
-				if (adjacent == end_city_idx) {
-					min_cities = search_depth;
-					suitable_city_idxs_next.clear();
-					break;
-				}
-
-				suitable_city_idxs_next.push_back(adjacent);
-			}
+			visited_cities[adj] = true;
+			distances[adj] = distances[next] + 1;
+			next_cities.push(adj);
 		}
-		suitable_city_idxs.clear();
-		suitable_city_idxs.swap(suitable_city_idxs_next);
-	} while (!suitable_city_idxs.empty());
+	}
 
-	std::cout << min_cities;
+	std::cout << distances[end_city_idx];
 }

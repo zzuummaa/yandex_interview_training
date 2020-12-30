@@ -4,28 +4,20 @@ int main() {
 	int len;
 	std::cin >> len;
 
-	int units_begin = 0;
-	int prev_num = 2;
-	int seq_max_len = 0;
+	int count = 0;
+	int max_count = 0;
 
 	for (int i = 0; i < len; ++i) {
 		int num;
 		std::cin >> num;
 
-		if (prev_num == 1 && num != 1) {
-			int cur_seq_len = i - units_begin;
-			if (cur_seq_len > seq_max_len) seq_max_len = cur_seq_len;
-		} else if (prev_num != 1 && num == 1) {
-			units_begin = i;
+		if (num == 1) {
+		 	count++;
+		 	if (count > max_count) max_count = count;
+		} else {
+			count = 0;
 		}
-
-		prev_num = num;
 	}
 
-	if (prev_num == 1) {
-		int cur_seq_len = len - units_begin;
-		if (cur_seq_len > seq_max_len) seq_max_len = cur_seq_len;
-	}
-
-	std::cout << seq_max_len;
+	std::cout << max_count;
 }
