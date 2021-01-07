@@ -6,5 +6,6 @@ set(CMAKE_CXX_STANDARD 14)
 add_subdirectory(articles)
 add_subdirectory(codeforce_beta_round_9)
 add_subdirectory(contest)
+add_subdirectory(other)
 
 #add_executable(yandex_contest src/rock_and_decoration/main.cpp)
