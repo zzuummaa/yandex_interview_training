@@ -80,9 +80,6 @@ public:
 
 int main() {
 	Cache<std::string> cache(std::chrono::microseconds(1));
-	cache.put(2, "abc");
-	cache.put(5, "def");
-	cache.put(7, "igk");
 
 	std::default_random_engine random_engine;
 	std::uniform_int_distribution<int> idx_generator(0, 1000 * 1000);
