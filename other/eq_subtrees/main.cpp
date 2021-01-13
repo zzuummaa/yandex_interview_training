@@ -14,6 +14,7 @@ set<char> FindEquivalentSubtreesInternal(map<set<char>, TNode*>& subtrees, pair<
 	if (root == nullptr) return set<char>();
 
 	set<char> chars;
+	chars.insert(root->value);
 	set<char> letf_chars = FindEquivalentSubtreesInternal(subtrees, res, root->left);
 	set<char> right_chars = FindEquivalentSubtreesInternal(subtrees, res, root->right);
 
