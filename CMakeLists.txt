@@ -4,6 +4,7 @@ project(yandex_interview_training)
 set(CMAKE_CXX_STANDARD 17)
 
 add_subdirectory(articles)
+add_subdirectory(basics)
 add_subdirectory(codeforce_beta_round_9)
 add_subdirectory(contest)
 add_subdirectory(leetcode)
